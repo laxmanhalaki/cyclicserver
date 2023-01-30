@@ -7,7 +7,7 @@ var imagepath = '';
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		console.log(file);
-		cb(null, './Public/Images');
+		cb(null, path.resolve('./Public/Images'));
 	},
 	filename: (req, file, cb) => {
 		imagepath = '/images/' + file.originalname;
@@ -16,6 +16,7 @@ const storage = multer.diskStorage({
 });
 const port=process.env.PORT ||8000;
 const upload = multer({ storage: storage });
+const URL ='mongodb+srv://laxman:lucky@cluster0.evv521m.mongodb.net/Newcollection';
 
 const app = express();
 app.use(cors());
@@ -25,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-	.connect(process.env.DB_URL,
+	.connect(process.env.DB_URL|| URL,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
