@@ -32,7 +32,7 @@ mongoose
 		}
 	)
 	.then(() => {
-		console.log('mongodb connected');
+		console.log('mongodb connected successfully');
 	});
 
 const { Schema } = mongoose;
