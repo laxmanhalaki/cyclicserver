@@ -25,8 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-	.connect(
-		'mongodb+srv://laxman:lucky@cluster0.evv521m.mongodb.net/Newcollection',
+	.connect(process.env.DB_URL,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
