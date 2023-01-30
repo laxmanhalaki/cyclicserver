@@ -1,21 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const multer = require('multer');
+const url=require('url');
+const fs=require('fs');
+const formidable=require('formidable')
 const path = require('path');
-var imagepath = '';
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		console.log(file);
-		cb(null, path.resolve('./Public/Images'));
-	},
-	filename: (req, file, cb) => {
-		imagepath = '/Images/' + file.originalname;
-		cb(null, file.originalname);
-	},
-});
+
+
 const port=process.env.PORT ||8000;
-const upload = multer({ storage: storage });
+
 const URL ='mongodb+srv://laxman:lucky@cluster0.evv521m.mongodb.net/Newcollection';
 
 const app = express();
@@ -230,20 +223,33 @@ const Cardetailschem = new Schema({
 		},
 	],
 });
-app.post('/upload', upload.array('files'), (req, res) => {
-	console.log(req.body);
-	let image = new Image({
-		name: req.body.name,
-		image: imagepath,
-	});
-	image.save((err, res) => {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(res);
-		}
-	});
-	res.send('file uploaded');
+app.post('/upload',(req, res) => {
+	var imagepath=''
+				var form = new formidable.IncomingForm({
+				uploadDir: './Public/Images',
+				filename: (err, fields, files) => {
+					console.log(fields)
+					imagepath= '/Images/'+ files.originalFilename;
+					return files.originalFilename;
+				},
+			});
+			form.parse(req, function (err, fields, files) {
+				console.log(fields);
+				let image = new Image({
+					name: fields.name,
+					image: imagepath,
+				});
+				image.save((err, res) => {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log(res);
+					}
+				});
+				res.send('file uploaded');
+				
+			});	
+	
 });
 app.get('/upload', (req, res) => {
 	res.sendFile(path.resolve('/Images/clipart2117600.png'));
