@@ -7,7 +7,7 @@ var imagepath = '';
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		console.log(file);
-		cb(null, path.resolve('./Public/Images'));
+		cb(null, path.resolve('./Public/images'));
 	},
 	filename: (req, file, cb) => {
 		imagepath = '/images/' + file.originalname;

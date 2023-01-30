@@ -83,7 +83,7 @@
 		<div class="containe">
 			<% for (item of entries) { %>
 			<div class="box">
-				<img src="http://localhost:8000<%= item.image %>" alt="" />
+				<img src="https://powerful-goat-sheath-dress.cyclic.app<%= item.image %>" alt="" />
 				<button class="submit-btn" onclick="deleteone('<%=item.image%>')">
 					Delete
 				</button>
@@ -94,7 +94,7 @@
 			const deleteone = (imagename) => {
                 let data={ima: imagename}
                 console.log(imagename)
-				fetch('http://localhost:8000/image', {
+				fetch('https://powerful-goat-sheath-dress.cyclic.app/image', {
 					method: 'DELETE',
                       headers: {
       'Content-Type': 'application/json'
