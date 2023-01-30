@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			body {
+				background-color: rgb(6, 26, 27);
+			}
+			* {
+				box-sizing: border-box;
+			}
+			.container {
+				max-width: 500px;
+				margin: 60px auto;
+			}
+			.container h1 {
+				text-align: center;
+				color: white;
+			}
+			form {
+				background-color: white;
+				padding: 30px;
+			}
+			form .input-group {
+				margin-bottom: 15px;
+			}
+			form label {
+				display: block;
+				margin-bottom: 10px;
+			}
+			form input {
+				padding: 12px 20px;
+				width: 100%;
+				border: 1px solid #ccc;
+			}
+			.submit-btn {
+				width: 100%;
+				border: none;
+				background: rgb(37, 83, 3);
+				font-size: 18px;
+				color: white;
+				border-radius: 3px;
+				padding: 20px;
+				text-align: center;
+			}
+			.containe {
+				display: grid;
+				width: 100%;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				background-color: white;
+			}
+			.box {
+				padding: 10px;
+			}
+			.box img {
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>File Upload</h1>
+			<form
+				enctype="multipart/form-data"
+				method="post"
+				id="form"
+				action="upload"
+			>
+				<div class="input-group">
+					<label for="name">Image name</label>
+					<input name="name" id="name" placeholder="Enter your name" />
+				</div>
+				<div class="input-group">
+					<label for="files">Select files</label>
+					<input id="files" name="files" type="file" multiple />
+				</div>
+				<button class="submit-btn" type="submit">Upload</button>
+			</form>
+		</div>
+		<div class="containe">
+			<% for (item of entries) { %>
+			<div class="box">
+				<img src="http://localhost:8000<%= item.image %>" alt="" />
+				<button class="submit-btn" onclick="deleteone('<%=item.image%>')">
+					Delete
+				</button>
+			</div>
+			<% } %>
+		</div>
+		<script>
+			const deleteone = (imagename) => {
+                let data={ima: imagename}
+                console.log(imagename)
+				fetch('http://localhost:8000/image', {
+					method: 'DELETE',
+                      headers: {
+      'Content-Type': 'application/json'
+    },
+					body:JSON.stringify(data),
+				}).then((response) => response.json());
+			};
+		</script>
+	</body>
+</html>
