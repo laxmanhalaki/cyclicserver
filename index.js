@@ -25,10 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-	.connect('mongodb://localhost:27017/Project', {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
+	.connect(
+		'mongodb+srv://laxman:lucky@cluster0.evv521m.mongodb.net/Newcollection',
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
+	)
 	.then(() => {
 		console.log('mongodb connected');
 	});
