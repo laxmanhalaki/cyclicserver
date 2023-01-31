@@ -251,7 +251,8 @@ app.post('/upload',(req, res) => {
 			});	
 	
 });
-app.get('/upload', (req, res) => {
+
+https: app.get('/upload', (req, res) => {
 	res.sendFile(path.resolve('/Images/clipart2117600.png'));
 });
 app.get('/image', async function (req, response) {
@@ -261,6 +262,7 @@ app.get('/image', async function (req, response) {
 		} else {
 			response.render('main.ejs', {
 				entries: res,
+				variable: process.env.CYCLIC_URL,
 			});
 		}
 	});
@@ -272,7 +274,7 @@ app.delete('/image', async function (req, response) {
 		if (err) {
 			console.log(err);
 		} else {
-// res.remove();
+
 console.log(res)
 response.send("removed successfully")
 		}
@@ -305,7 +307,7 @@ app.get('/query/:string?', (req, response) => {
 			console.log(err);
 		} else {
 			// response.send(res);
-			response.render('carquery.ejs', { cars: res });
+			response.render('carquery.ejs', { cars: res,variable:process.env.K_VARIABLE });
 		}
 	});
 	}

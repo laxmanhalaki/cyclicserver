@@ -28,13 +28,13 @@ width: 100%;
 			color: rgb(162, 162, 162);
 		}
 	</style>
-	<!-- https://kalyanimotorsadmin.kalyanicrm.com/storage/images/LI7E9WIpol_0_1645164704.jpg -->
+
 </head>
 <body>
 <div class="car_container">
 	  <% for (item of cars) { %>
 	<div class="car_card">
-		<img src="https://kalyanimotorsadmin.kalyanicrm.com/storage/<%=item.images[0].images %>" />
+		<img src='<%=variable%><%=item.images[0].images%>' />
 		<h3><%=item.name %></h3>
 		<p><%=item.description %></p>
 	</div>
